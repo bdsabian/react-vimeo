@@ -19,11 +19,15 @@ const playerEvents = keyMirror({
 });
 
 function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.substring(1);
+  return str ? str.charAt(0).toUpperCase() + str.substring(1) : null;
 }
 
 function getFuncForEvent(event, props) {
-  return props['on' + capitalize(event)] || (() => {});
+  if (event) {
+    return props['on' + capitalize(event)] || (() => {});
+  }
+
+  return (() => {});
 }
 
 function post(method, value, player, playerOrigin) {
